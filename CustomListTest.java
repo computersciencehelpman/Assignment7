@@ -29,6 +29,27 @@ public class CustomListTest {
 
 }
 	
+	 @Test
+	 public void testAddIsValid() {
+		 
+		 CustomArrayList<Integer> list = new CustomArrayList<>();
+		 
+	     //Test valid scenarios
+		 assertTrue(list.addIsValid(10,0), "Should be valid to add at index 0 in an empty list");
+		 
+		 list.add(1); //Adding element to the list
+		 
+		 
+		 assertTrue(list.addIsValid(20,1), "Should be valid to add at index 1 in a non-empty list");
+		 
+		// Test invalid scenarios
+		 assertFalse(list.addIsValid(null,0), "Should not be valid to add null item");
+		 
+		 assertFalse(list.addIsValid(30, -1), "Should not be valid to add at negative index");
+		 
+		 assertFalse(list.addIsValid(40, list.getSize() +1), "Should not be valid to add at index greater than size");
+		 
+	 }
 	 
 	 @Test
 	 public void testAddAtPosition() {
@@ -47,7 +68,70 @@ public class CustomListTest {
 	     // Verify the size of the list after additions and replacements
 	     assertEquals(2, list.getSize(), "Size of the list should be 2 after additions and replacements");
 	 }
+	 
+	 @Test
+	 public void testRemoveIsValid() {
+		
+		 CustomArrayList<Integer> list = new CustomArrayList<>();
+		 
+		 //Adding elements into ArayList
+		 list.add(0, 10);
+		 list.add(1,20);
+		 list.add(2,30);
+		 
+		 //Test valid scenarios
+		 assertTrue(list.removeIsValid(10,0), "Should be valid to remove at index 0");
+		 
+		// Test invalid scenarios
+		assertFalse(list.addIsValid(null,0), "Should not be valid to add null item");
+				 
+		assertFalse(list.addIsValid(30, -1), "Should not be valid to add at negative index");
+				 
+		assertFalse(list.addIsValid(40, list.getSize() +1), "Should not be valid to add at index greater than size");
+	 }
+	 
+	 @Test
+	    public void testIsValidGet() {
+	        CustomArrayList<Integer> list = new CustomArrayList<>();
 
+	        // Adding elements into ArrayList
+	        list.add(0, 1);
+	        list.add(1, 2);
+	        list.add(2, 3);
+
+	        // Test valid scenarios
+	        assertTrue(list.isValidGet(0), "Index 0 should be valid");
+	        assertTrue(list.isValidGet(1), "Index 1 should be valid");
+	        assertTrue(list.isValidGet(2), "Index 2 should be valid");
+
+	        // Test invalid scenarios
+	        assertFalse(list.isValidGet(-1), "Negative index should be invalid");
+	        assertFalse(list.isValidGet(3), "Index equal to size should be invalid");
+	        assertFalse(list.isValidGet(100), "Large index should be invalid");
+	    }
+
+	 @Test 
+	 public void testIsArrayFull() {
+		
+		 CustomArrayList<Integer> list = new CustomArrayList<>();
+		 
+		 //Initially, the list should not be full
+		 assertFalse(list.isArrayFull(), "List should not be full initially");
+		 
+		 //Add elements to fill the list to its initial capacity
+		 for (int i = 0; i < 10; i++) {
+			 list.add(i);
+		 }
+		 
+		 //Now, the list should be full
+		 assertTrue(list.isArrayFull(), "List should be full after adding 10 elements");
+		 
+		 //Add one more element to trigger the increase in capacity
+		 list.add(10);
+		 
+		 //After increasing the capacity, the list should not be full
+		 assertFalse(list.isArrayFull(), "List should not be full after increasing capacity");
+	 }
 	 
 	 @Test
 	 public void testRemoveItem() {

@@ -32,9 +32,40 @@ public class CustomArrayList<T> {
 
         return true;
     }
+    
+    public boolean addIsValid(T item, int index) throws IndexOutOfBoundsException {
+    	
+    if (item == null) {
+    	return false; //Null Items Are not valid
+    }
+    if (index < 0 || index > size)	{
+    	return false; //Index out of bounds
+    }
+    	
+    return true;	
+    	
+    	
+    }
+    
+    public boolean removeIsValid(T item, int index) throws IndexOutOfBoundsException {
+    	
+    	if(item == null) {
+    		return false; //Null Items Are not valid
+    	}
+    	if (index < 0 || index > size) {
+    		return false; //Index out of bounds
+    	}
+    	return true;
+    }
 
     public int getSize() {
         return size;
+    }
+    
+    public boolean isArrayFull() throws IndexOutOfBoundsException {
+    	
+    	return size == items.length;
+    	
     }
 
     private void increaseCapacity() {
@@ -48,6 +79,10 @@ public class CustomArrayList<T> {
         return (T) items[index];
     }
 
+    public boolean isValidGet(int index) throws IndexOutOfBoundsException {
+    	
+    	return index >= 0 && index < size;
+    }
     
     public T remove(int index) throws IndexOutOfBoundsException {
             if (index < 0 || index >= size) {
